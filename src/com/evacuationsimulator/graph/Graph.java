@@ -18,28 +18,22 @@ public class Graph {
         nodes.add(node);
     }
 
-    public void addEdge(Node source, Node destination, int distance) {
+    public void addEdge(Edge edge) {
 
-        Edge edge = new Edge(source, destination, distance);
+        edge.getSource().addEdge(edge);
 
-        source.addEdge(edge);
     }
 
     public List<Node> getNodes() {
         return nodes;
     }
 
-    public Node findNode(String name) {
+    public void resetVisited() {
 
         for (Node node : nodes) {
-
-            if (node.getLocationName().equalsIgnoreCase(name)) {
-                return node;
-            }
-
+            node.setVisited(false);
         }
 
-        return null;
     }
 
     public void displayGraph() {
@@ -50,16 +44,26 @@ public class Graph {
 
             System.out.println(node);
 
-            for (Edge edge : node.getEdges()) {
+            if (node.getEdges().isEmpty()) {
 
-                System.out.println("   --> "
-                        + edge.getDestination().getLocationName()
-                        + " ("
-                        + edge.getDistance()
-                        + " km)");
+                System.out.println("   No Connected Roads");
+
+            } else {
+
+                for (Edge edge : node.getEdges()) {
+
+                    System.out.println("   --> "
+                            + edge.getDestination().getLocationName()
+                            + " ("
+                            + edge.getDistance()
+                            + " km)");
+
+                }
+
             }
 
             System.out.println();
+
         }
 
     }

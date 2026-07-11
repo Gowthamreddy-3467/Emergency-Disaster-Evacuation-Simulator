@@ -4,28 +4,20 @@ import com.evacuationsimulator.enums.LocationType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Node {
 
     private String locationName;
     private LocationType locationType;
-    private boolean visited;
-
     private List<Edge> edges;
+    private boolean visited;
 
     public Node(String locationName, LocationType locationType) {
         this.locationName = locationName;
         this.locationType = locationType;
-        this.visited = false;
         this.edges = new ArrayList<>();
-    }
-
-    public void addEdge(Edge edge) {
-        edges.add(edge);
-    }
-
-    public List<Edge> getEdges() {
-        return edges;
+        this.visited = false;
     }
 
     public String getLocationName() {
@@ -34,6 +26,14 @@ public class Node {
 
     public LocationType getLocationType() {
         return locationType;
+    }
+
+    public List<Edge> getEdges() {
+        return edges;
+    }
+
+    public void addEdge(Edge edge) {
+        edges.add(edge);
     }
 
     public boolean isVisited() {
@@ -48,4 +48,24 @@ public class Node {
     public String toString() {
         return locationName + " [" + locationType + "]";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj)
+            return true;
+
+        if (!(obj instanceof Node))
+            return false;
+
+        Node other = (Node) obj;
+
+        return Objects.equals(locationName, other.locationName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(locationName);
+    }
+
 }

@@ -1,7 +1,11 @@
 package com.evacuationsimulator.main;
 
+import com.evacuationsimulator.algorithms.BFS;
+import com.evacuationsimulator.algorithms.DFS;
+import com.evacuationsimulator.algorithms.Dijkstra;
 import com.evacuationsimulator.enums.LocationType;
 import com.evacuationsimulator.graph.Graph;
+import com.evacuationsimulator.model.Edge;
 import com.evacuationsimulator.model.Node;
 
 public class Main {
@@ -20,13 +24,25 @@ public class Main {
         city.addNode(police);
         city.addNode(shelter);
 
-        city.addEdge(hospital, school, 5);
-        city.addEdge(hospital, police, 3);
-        city.addEdge(police, shelter, 4);
-        city.addEdge(school, shelter, 6);
+        city.addEdge(new Edge(hospital, school, 5));
+        city.addEdge(new Edge(hospital, police, 3));
+        city.addEdge(new Edge(police, shelter, 4));
+        city.addEdge(new Edge(school, shelter, 6));
 
+        // Display Graph
         city.displayGraph();
 
-    }
+        // Dijkstra
+        Dijkstra dijkstra = new Dijkstra();
+        dijkstra.shortestPath(city, hospital, shelter);
 
+        // BFS
+        BFS bfs = new BFS();
+        bfs.traverse(city, hospital);
+
+        // DFS
+        DFS dfs = new DFS();
+        dfs.traverse(city, hospital);
+
+    }
 }
