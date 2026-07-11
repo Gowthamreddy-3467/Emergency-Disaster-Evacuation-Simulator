@@ -3,31 +3,23 @@ package com.evacuationsimulator.main;
 import com.evacuationsimulator.algorithms.BFS;
 import com.evacuationsimulator.algorithms.DFS;
 import com.evacuationsimulator.algorithms.Dijkstra;
-import com.evacuationsimulator.enums.LocationType;
 import com.evacuationsimulator.graph.Graph;
-import com.evacuationsimulator.model.Edge;
 import com.evacuationsimulator.model.Node;
+import com.evacuationsimulator.services.CityBuilder;
+import com.evacuationsimulator.model.City;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Graph city = new Graph();
+        // Create the city
+        City cityModel = CityBuilder.createCity();
 
-        Node hospital = new Node("Hospital", LocationType.HOSPITAL);
-        Node school = new Node("School", LocationType.SCHOOL);
-        Node police = new Node("Police Station", LocationType.POLICE_STATION);
-        Node shelter = new Node("Shelter", LocationType.SHELTER);
+        Graph city = cityModel.getGraph();
 
-        city.addNode(hospital);
-        city.addNode(school);
-        city.addNode(police);
-        city.addNode(shelter);
-
-        city.addEdge(new Edge(hospital, school, 5));
-        city.addEdge(new Edge(hospital, police, 3));
-        city.addEdge(new Edge(police, shelter, 4));
-        city.addEdge(new Edge(school, shelter, 6));
+        // Get required locations from the graph
+        Node hospital = cityModel.getHospital();
+        Node shelter = cityModel.getShelter();
 
         // Display Graph
         city.displayGraph();

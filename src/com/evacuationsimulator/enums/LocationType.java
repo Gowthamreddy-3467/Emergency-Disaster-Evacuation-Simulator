@@ -11,5 +11,7 @@ public enum LocationType {
     RAILWAY_STATION,
     AIRPORT,
     MALL,
-    RESIDENTIAL_AREA
+    RESIDENTIAL_AREA,
+    GOVERNMENT_OFFICE,
+    PARK
 }
