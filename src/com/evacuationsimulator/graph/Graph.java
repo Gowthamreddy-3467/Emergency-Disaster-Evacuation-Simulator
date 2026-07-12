@@ -56,7 +56,10 @@ public class Graph {
                             + edge.getDestination().getLocationName()
                             + " ("
                             + edge.getDistance()
-                            + " km)");
+                            + " km"
+                            + ", Traffic: "
+                            + edge.getTrafficLevel()
+                            + ")");
 
                 }
 
